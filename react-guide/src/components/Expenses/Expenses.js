@@ -1,7 +1,8 @@
 import "./ExpenseItem.css";
 import ExpenseItem from "./ExpenseItem";
 
-function Expenses({ items }) {
+function Expenses({ items, year }) {
+  console.log("in expenses", year);
   return items.map((item) => (
     <ExpenseItem
       key={item.id}

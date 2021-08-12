@@ -1,9 +1,12 @@
 import "./App.css";
 import "./components/Expenses/Expenses.css";
-import ExpensesContainer from "./components/Expenses/ExpensesContainer";
+import NewExpense from "./components/NewExpense/NewExpense";
 
-function App() {
-  const expenses = [
+import ExpensesContainer from "./components/Expenses/ExpensesContainer";
+import { useState } from "react";
+
+const App = () => {
+  const expensesList = [
     {
       id: "e1",
       title: "Notebook",
@@ -24,7 +27,20 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
-  return <ExpensesContainer expenses={expenses} />;
-}
+  const [expenses, setExpenses] = useState(expensesList);
+
+  const onNewExpenseAddedHandler = (newExpenseData) => {
+    setExpenses((previousExpenses) => {
+      return [newExpenseData, ...previousExpenses];
+    });
+  };
+
+  return (
+    <div>
+      <NewExpense onNewExpenseAdded={onNewExpenseAddedHandler}></NewExpense>
+      <ExpensesContainer expenses={expenses} />;
+    </div>
+  );
+};
 
 export default App;
